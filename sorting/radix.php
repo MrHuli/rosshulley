@@ -175,7 +175,7 @@
                     oscillator.type = parseInt(1);
                     oscillator.frequency.value = freq;
                     oscillator.connect(oscContext.destination);
-                    oscillator.noteOn && oscillator.noteOn(0); // this method doesn't seem to exist, though it's in the docs?
+                    //oscillator.noteOn && oscillator.noteOn(1); // this method doesn't seem to exist, though it's in the docs?
                 };
 
 
