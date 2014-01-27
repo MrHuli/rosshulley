@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/main.css">
+        <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+    </head>
+    <body id="top" data-spy="scroll" data-target=".subnav" data-offset="80" style="margin-top: 0px;">
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div class="container">
+
+
+            <!-- Masthead
+            ================================================== -->
+            <header class="jumbotron subhead" id="overview">
+                <div class="row">
+                    <div class="span6">
+                        <h1>Ross Hulley</h1>
+                        <p class="lead">Developers Playground</p>
+                    </div>
+                </div>
+                <div class="subnav">
+                    <ul class="nav nav-pills">
+                        <li><a href="#me">Me</a></li>
+                        <li><a href="#experiments">Experiments</a></li>
+                        <li><a href="#myself">Myself</a></li>
+                    </ul>
+                </div>
+            </header>
+
+            <!-- Me
+            ================================================== -->
+            <section id="me">
+                <div class="page-header">
+                    <h1>Me</h1>
+                </div>
+
+                <div class="row">
+
+                    <div class="span4">
+                        <h3>Me</h3>
+                        <p>I am a web developer at Tracesmart, my name is Ross Hulley</p>
+                        <p>Perhaps one day, I'll tell you more about myself.</p>
+                    </div>
+
+                    <div class="span4">
+                        <h3>My Website</h3>
+                        <p>Here is a just small patch I threw together to collect a few <a href="#experiments">experiments</a> around.</p>
+                        <p>Have a little look around at the toys I have put together in my free time.</p>
+                    </div>
+
+                    <div class="span4">
+                        <h3>Contact me?</h3>
+                        <address>
+                            <strong>Ross Hulley</strong><br>
+                            <a href="mailto:huli1989@gmail.com">huli1989@gmail.com</a>
+                        </address>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- Experiments
+            ================================================== -->
+            <section id="experiments">
+                <div class="page-header">
+                    <h1>Experiments</h1>
+                </div>
+
+                <div class="row">
+                    <div class="span4">
+                        <h3><a target="_blank" href="ukguessr/">UK Guesser!</a></h3>
+                        <h4>Guess where you are in the UK using Google street view!</h4>
+                        <p>Places you in a random street view location in the UK, and from here you have to guess which town you are in</p>
+                        <p>Originally picking a random Latitude and Longitude in the UK and putting you on the nearest street view, this almost always ended in the player being on a nondescript country lane! Updated now to only include major towns and cities in the UK, plus some personal locations :).</p>
+                        <p>A learning exercise and an example of using Google maps API, inspired by geoguessr.</p>
+                        <a target="_blank" href="ukguessr/">UK Guessr</a>
+                    </div>
+                    <div class="span4">
+                        <h3>HTML 5 Canvas Toys</h3>
+                        <h4>Sorting Algorithms</h4>
+                        <p>A visualisation of sorting algorithms, now with sound! (WARNING, LOUD)</p>
+                        <p>Each one of these creates a random array of numbers, uses these to determine the hight of several bars, these bars are then sorted from shortest to highest.</p>
+                        <p>Every time a piece is moved, a sound wave is generated, with the height of the bar determining the frequency of the wave.</p>
+                        <ul>
+                            <li><a target="_blank" href="sorting/bubble.php">Bubble Sort</a></li>
+                            <li><a target="_blank" href="sorting/radix.php">Radix Sort</a></li>
+                            <li><a target="_blank" href="sorting/insertion.php">Insertion Sort</a></li>
+                            <li><a target="_blank" href="sorting/cocktail.php">Cocktail Shaker Sort</a></li>
+                        </ul>
+                        <h3>Bouncy balls</h3>
+                        <h4>Collisions and animations</h4>
+                        <p>Multicoloured bouncy balls. Click and drag to add more balls to the screen. Working with gravity and momentum, balls lose a little on each bounce</p>
+                        <p>Demonstration of a flexible canvas (resize it!) and touch events etc, and works with the accelerometer in iPads, turn it and the balls always fall down.</p>
+                        <p>Shake the iPad to remove balls.</p>
+                        <ul>
+                            <li><a target="_blank" href="bounce/balls.php">Main Project</a></li>
+                            <li>Older Prototypes:</li>
+                            <li><a target="_blank" href="bounce/drag.php">With Air Resistance</a></li>
+                            <li><a target="_blank" href="bounce/normal.php">No Air Resistance</a></li>
+                        </ul>
+                    </div>
+                    <div class="span4">
+                        <h3>PHP Play</h3>
+                        <h4>Very old stuff</h4>
+                        <p>Some things I made for the fun of a a long time ago!</p>
+                        <ul>
+                            <li><a target="_blank" href="other/lotto.php">Lottery Sim</a> - Put your numbers in and weeks to play, and it will tell you how much you have won, based of real lotto data. Bit depressing in a way! Big wins show up red, 3 numbers not shown</li>
+                            <li><a target="_blank" href="other/pascals.php">Pascal's Triangle</a> - Generates Pascal's triangle to a given depth - Uses tables and colouring each layer, can generate pretty patterns. Capped at a depth of 100.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Myself
+            ================================================== -->
+            <section id="myself">
+                <div class="page-header">
+                    <h1>Myself</h1>
+                </div>
+
+                <div class="row">
+
+                    <div class="span4">
+                        <h3>Personal</h3>
+                        <p>Personally, I'd rather not write too much here</p>
+                    </div>
+
+                    <div class="span4">
+                        <h3>Skills</h3>
+                        <span class="badge">jQuery</span>
+                        <span class="badge">HTML 5</span>
+                        <span class="badge">PHP</span>
+                        <span class="badge">MySQL</span>
+                        <span class="badge">JavaScript</span>
+                        <span class="badge">CSS</span>
+                        <span class="badge">Apache</span>
+                        <span class="badge">Web Applications</span>
+                        <span class="badge">Web Development</span>
+                        <span class="badge">HTML</span>
+                        <span class="badge">Scrum</span>
+                        <span class="badge">AJAX</span>
+                        <span class="badge">XML</span>
+                        <span class="badge">MVC</span>
+                        <span class="badge">Linux</span>
+                        <span class="badge">Zend Framework</span>
+                        <span class="badge">Subversion</span>
+                        <span class="badge">Agile Methodologies</span>
+                        <span class="badge">Git</span>
+                        <span class="badge">Web Services</span>
+                    </div>
+
+                    <div class="span4">
+                        <h3>Other Links</h3>
+                        <address>
+                            <a href="http://www.linkedin.com/profile/view?id=266880562">LinkedIn</a>
+                        </address>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- Footer
+             ================================================== -->
+            <hr>
+
+            <footer id="footer">
+                <p class="pull-right"><a href="#top">Back to top</a></p>
+                <div class="links">
+                    <a href="#">Some</a>
+                    <a href="#">Fake</a>
+                    <a href="#">Links</a>
+                    <a href="#">Because Why Not</a>
+                </div>
+                Website by Ross Hulley, using Twitter Bootstrap and HTML5 Boilerplate
+            </footer>
+
+        </div>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+        <script src="js/jquery.smooth-scroll.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/main.js"></script>
+
+        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
+        <script>
+            var _gaq = [['_setAccount', 'UA-XXXXX-X'], ['_trackPageview']];
+            (function(d, t) {
+                var g = d.createElement(t), s = d.getElementsByTagName(t)[0];
+                g.src = '//www.google-analytics.com/ga.js';
+                s.parentNode.insertBefore(g, s)
+            }(document, 'script'));
+        </script>
+    </body>
+</html>

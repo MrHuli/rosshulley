@@ -1,0 +1,11 @@
+
+html { height: 100% }
+body { height: 100%; margin: 0; padding: 0 }
+.sidebar { height: 500px; width: 400px; position:absolute; right:0; top:0; background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f5f3f1), to(beige));  border-radius: 0 0 10px 10px; box-shadow: 2px 0px 5px 2px #333333; }
+#map-canvas { height: 390px; width: 390px; margin:5px;}
+#pano { height: 100%;}
+.undermap{margin:5px; position:relative;}
+.submit-btn{width:100%; clear:left; }
+.modal-body{overflow:hidden;}
+#result-map { height: 390px; width: 530px;}
+#myModalLabel{font-weight: normal;}
