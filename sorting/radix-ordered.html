@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-GB" xmlns="http://www.w3.org/1999/xhtml" xml:lang="" class="no-js">
+    <head>
+        <style>
+            * { margin: 0; padding: 0; }
+            html, body { height: 100%; width: 100%; }
+            canvas { display: block; }
+        </style>
+        <title>
+            The TEST
+        </title>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+        <meta name="owner" content="Ross Hulley" />
+        <meta name="rating" content="General" />
+        <meta name="language" content="en" />
+        <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+        <script>
+            $(function() {
+                var nums = [], numBlocks = 500, a = range(1, numBlocks), blockheight = 300, blockwidth = 10, intval, intval2, canvas, context, width, height, n = a.length, d = 0, i = 0, p = 0, b = 1 << d;
+
+                for (var j = 0; j < n; j++) {
+                    nums[j] = a[j].value;
+                }
+
+                var k = Math.max.apply(null, nums.map(function(i) {
+                    return Math.ceil(Math.log(i) / Math.log(2));
+                }));
+
+                canvas = $("#canvas")[0];
+                width = canvas.width;
+                height = canvas.height;
+                context = canvas.getContext("2d");
+                context.fillStyle = "rgb(0, 0, 0)";
+
+                $("#canvas").attr("width", $(window).get(0).innerWidth);
+                $("#canvas").attr("height", $(window).get(0).innerHeight);
+
+                $(window).resize(resizeCanvas);
+
+                function resizeCanvas() {
+                    $("#canvas").attr("width", $(window).get(0).innerWidth);
+                    $("#canvas").attr("height", $(window).get(0).innerHeight);
+                    width = canvas.width;
+                    height = canvas.height;
+                    context.fillRect(0, 0, width, height);
+                }
+
+                resizeCanvas();
+
+                function range(start, count) {
+                    height = $(window).get(0).innerHeight;
+                    width = $(window).get(0).innerWidth;
+                    if (arguments.length == 1) {
+                        count = start;
+                        start = 0;
+                    }
+
+                    var foo = [];
+                    for (var i = 0; i < count; i++) {
+                        foo.push({
+                            value: start + i,
+                            height: ((start + i) / count) * height,
+                            width: width / count,
+                            color: "rgb(255,255,255)"
+                        });
+                    }
+                    return foo;
+                }
+
+                function shuffle(array) {
+                    var counter = array.length, temp, index;
+
+                    // While there are elements in the array
+                    while (counter > 0) {
+                        // Pick a random index
+                        index = Math.floor(Math.random() * counter);
+
+                        // Decrease counter by 1
+                        counter--;
+
+                        // And swap the last element with it
+                        temp = array[counter];
+                        array[counter] = array[index];
+                        array[index] = temp;
+                    }
+
+                    return array;
+                }
+
+                draw();
+
+                function radixSort() {
+                    n = a.length;
+                    i = 0;
+                    p = 0;
+                    b = 1 << d;
+                    if (d < k) {
+                        clearInterval(intval);
+
+                        intval = setInterval(function() {
+                            dosplice();
+                        }, 1);
+                        ++d;
+
+                    } else {
+                        clearInterval(intval);
+
+
+                        intval = setInterval(function() {
+                            checkAll();
+                        }, 1);
+                    }
+                }
+
+                function dosplice() {
+                    if (i < n) {
+                        var o = a[i].value;
+                        if ((o & b) == 0) {
+                            a[i].color = "rgb(255,0 , 0)";
+                            updateFreq(o);
+                            draw();
+                            a[i].color = "rgb(255,255 , 255)";
+                            // this number is a 0 for this digit
+                            // move it to the front of the list
+                            a.splice(p++, 0, a.splice(i, 1)[0]);
+                        }
+                        ++i;
+                    } else {
+                        clearInterval(intval);
+
+
+                        intval = setInterval(function() {
+                            radixSort();
+                        }, 1);
+                    }
+                }
+
+                function checkAll() {
+                    for (var i = 0; i < numBlocks; i++) {
+                        if (a[i].color != "rgb(0, 255, 0)") {
+                            a[i].color = "rgb(0, 255, 0)";
+                            updateFreq(a[i].value);
+                            draw();
+                            break;
+                        }
+                        if (a[numBlocks - 1].color == "rgb(0, 255, 0)") {
+                            clearInterval(intval);
+                            // kill sound
+                            oscillator.disconnect();
+                        }
+                    }
+
+                }
+
+                function draw() {
+                    context.fillStyle = "rgb(0, 0, 0)";
+                    context.fillRect(0, 0, width, height);
+                    var i, block;
+                    for (i = 0; i < numBlocks; i += 1) {
+                        block = a[i];
+                        context.fillStyle = block.color;
+                        context.fillRect(block.width * i, height - block.height, block.width, block.height);
+                    }
+                }
+
+                intval = setInterval(function() {
+                    radixSort();
+                }, 1);
+
+
+
+                var oscContext = new AudioContext(),
+                        oscillator = oscContext.createOscillator();
+                oscillator.start(); // this method doesn't seem to exist, though it's in the docs?
+
+                var updateFreq = function(freq) {
+                    oscillator.type = 'sine';
+                    oscillator.frequency.value = freq;
+                    oscillator.connect(oscContext.destination);
+                };
+
+
+            });
+        </script>
+    </head>
+
+
+    <body>
+        <canvas id="canvas">
+        </canvas>
+    </body>
+</html>

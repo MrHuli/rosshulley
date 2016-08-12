@@ -16,7 +16,15 @@
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
         <script>
             $(function() {
-                var numBlocks = 300, a = shuffle(range(1, numBlocks)), blockheight = 300, blockwidth = 10, intval, canvas, context, width, height, n = a.length;
+                var nums = [], numBlocks = 500, a = shuffle(range(1, numBlocks)), blockheight = 300, blockwidth = 10, intval, intval2, canvas, context, width, height, n = a.length, d = 0, i = 0, p = 0, b = 1 << d;
+
+                for (var j = 0; j < n; j++) {
+                    nums[j] = a[j].value;
+                }
+
+                var k = Math.max.apply(null, nums.map(function(i) {
+                    return Math.ceil(Math.log(i) / Math.log(2));
+                }));
 
                 canvas = $("#canvas")[0];
                 width = canvas.width;
@@ -36,8 +44,6 @@
                     height = canvas.height;
                     context.fillRect(0, 0, width, height);
                 }
-                ;
-
 
                 resizeCanvas();
 
@@ -83,46 +89,67 @@
 
                 draw();
 
-                function bubbleSort()
-                {
-                    swapped = false;
-                    for (var i = 0; i < n - 1; i++) {
-                        if (a[i].value > a[i + 1].value) {
-                            updateFreq(a[i].value * 6);
-                            var temp = a[i];
-                            a[i] = a[i + 1];
-                            a[i + 1] = temp;
-                            draw();
-                        }
-                        swapped = true;
-                    }
-                    n = n - 1;
-                    if (!swapped) {
+                function radixSort() {
+                    n = a.length;
+                    i = 0;
+                    p = 0;
+                    b = 1 << d;
+                    if (d < k) {
+                        clearInterval(intval);
+
+                        intval = setInterval(function() {
+                            dosplice();
+                        }, 1);
+                        ++d;
+
+                    } else {
                         clearInterval(intval);
 
 
                         intval = setInterval(function() {
                             checkAll();
-                        }, 5);
+                        }, 1);
+                    }
+                }
 
+                function dosplice() {
+                    if (i < n) {
+                        var o = a[i].value;
+                        if ((o & b) == 0) {
+                            a[i].color = "rgb(255,0 , 0)";
+                            updateFreq(o);
+                            draw();
+                            a[i].color = "rgb(255,255 , 255)";
+                            // this number is a 0 for this digit
+                            // move it to the front of the list
+                            a.splice(p++, 0, a.splice(i, 1)[0]);
+                        }
+                        ++i;
+                    } else {
+                        clearInterval(intval);
+
+
+                        intval = setInterval(function() {
+                            radixSort();
+                        }, 1);
                     }
                 }
 
                 function checkAll() {
                     for (var i = 0; i < numBlocks; i++) {
-                        if(a[i].color != "rgb(0, 255, 0)"){
+                        if (a[i].color != "rgb(0, 255, 0)") {
                             a[i].color = "rgb(0, 255, 0)";
-                            updateFreq(a[i].value * 6);
+                            updateFreq(a[i].value);
                             draw();
                             break;
                         }
-                        if(a[numBlocks-1].color == "rgb(0, 255, 0)"){
+                        if (a[numBlocks - 1].color == "rgb(0, 255, 0)") {
                             clearInterval(intval);
                             // kill sound
                             oscillator.disconnect();
                         }
                     }
-                    
+
                 }
 
                 function draw() {
@@ -137,18 +164,19 @@
                 }
 
                 intval = setInterval(function() {
-                    bubbleSort();
-                }, 1000 / 36);
+                    radixSort();
+                }, 1);
 
 
-                var oscContext = new webkitAudioContext(),
+
+                var oscContext = new AudioContext(),
                         oscillator = oscContext.createOscillator();
+                oscillator.start(); // this method doesn't seem to exist, though it's in the docs?
 
                 var updateFreq = function(freq) {
-                    oscillator.type = parseInt(3);
+                    oscillator.type = 'sine';
                     oscillator.frequency.value = freq;
                     oscillator.connect(oscContext.destination);
-                    oscillator.noteOn;//DISABLED DUE TO BUG IN CHROME && oscillator.noteOn(0); // this method doesn't seem to exist, though it's in the docs?
                 };
 
 

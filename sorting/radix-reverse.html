@@ -16,7 +16,7 @@
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
         <script>
             $(function() {
-                var nums = [], numBlocks = 500, a = shuffle(range(1, numBlocks)), blockheight = 300, blockwidth = 10, intval, intval2, canvas, context, width, height, n = a.length, d = 0, i = 0, p = 0, b = 1 << d;
+                var nums = [], numBlocks = 500, a = range(1, numBlocks).reverse(), blockheight = 300, blockwidth = 10, intval, intval2, canvas, context, width, height, n = a.length, d = 0, i = 0, p = 0, b = 1 << d;
 
                 for (var j = 0; j < n; j++) {
                     nums[j] = a[j].value;
@@ -168,14 +168,15 @@
                 }, 1);
 
 
-                var oscContext = new webkitAudioContext(),
+
+                var oscContext = new AudioContext(),
                         oscillator = oscContext.createOscillator();
+                oscillator.start(); // this method doesn't seem to exist, though it's in the docs?
 
                 var updateFreq = function(freq) {
-                    oscillator.type = parseInt(1);
+                    oscillator.type = 'sine';
                     oscillator.frequency.value = freq;
                     oscillator.connect(oscContext.destination);
-                    //oscillator.noteOn && oscillator.noteOn(1); // this method doesn't seem to exist, though it's in the docs?
                 };
 
 

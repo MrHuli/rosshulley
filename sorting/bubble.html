@@ -16,7 +16,7 @@
         <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
         <script>
             $(function() {
-                var numBlocks = 300, a = shuffle(range(1, numBlocks)), blockheight = 300, blockwidth = 10, intval, canvas, context, width, height, curmax=a.length - 1, curmin=-1;
+                var numBlocks = 200, a = shuffle(range(1, numBlocks)), blockheight = 300, blockwidth = 10, intval, canvas, context, width, height, n = a.length;
 
                 canvas = $("#canvas")[0];
                 width = canvas.width;
@@ -85,43 +85,25 @@
 
                 function bubbleSort()
                 {
-                    moved=false;
-                    // increases `begin` because the elements before `begin` are in correct order
-                    curmin++;
-                    for (var i=curmin; i < curmax; i++) {
+                    swapped = false;
+                    for (var i = 0; i < n - 1; i++) {
                         if (a[i].value > a[i + 1].value) {
                             updateFreq(a[i].value * 6);
                             var temp = a[i];
                             a[i] = a[i + 1];
                             a[i + 1] = temp;
                             draw();
-                            moved = true;
                         }
+                        swapped = true;
                     }
-                    if (!moved) {
-                        clearInterval(intval);
-
-                        intval = setInterval(function() {
-                            checkAll();
-                        }, 1);
-                    };
-                    curmax--;
-                    for (var i=curmax; i >= curmin; i--)
-                         if (a[i].value < a[i-1].value) {
-                            updateFreq(a[i].value * 6);
-                            var temp = a[i];
-                            a[i] = a[i - 1];
-                            a[i - 1] = temp;
-                            draw();
-                            moved=true;
-                         }
-                    if (!moved) {
+                    n = n - 1;
+                    if (!swapped) {
                         clearInterval(intval);
 
 
                         intval = setInterval(function() {
                             checkAll();
-                        }, 1);
+                        }, 5);
 
                     }
                 }
@@ -140,7 +122,7 @@
                             oscillator.disconnect();
                         }
                     }
-                    
+
                 }
 
                 function draw() {
@@ -159,14 +141,14 @@
                 }, 1000 / 36);
 
 
-                var oscContext = new webkitAudioContext(),
+                var oscContext = new AudioContext(),
                         oscillator = oscContext.createOscillator();
+                        oscillator.start(); // this method doesn't seem to exist, though it's in the docs?
 
                 var updateFreq = function(freq) {
-                    oscillator.type = parseInt(2);
+                    oscillator.type = 'sine';
                     oscillator.frequency.value = freq;
                     oscillator.connect(oscContext.destination);
-                    oscillator.noteOn;//DISABLED DUE TO BUG IN CHROME && oscillator.noteOn(0); // this method doesn't seem to exist, though it's in the docs?
                 };
 
 

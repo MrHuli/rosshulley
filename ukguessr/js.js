@@ -82,7 +82,8 @@ var cities = [
     'belfast',
     'derry',
     'lisburn',
-    'newry'
+    'newry',
+    'risca'
 ];
 function initialize() {
     geocoder = new google.maps.Geocoder();
